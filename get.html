@@ -1,4 +1,11 @@
-  let data = [];
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="none">
+    <title>get</title>
+    <script>
+      let data = [];
   const socket = new WebSocket('wss://cloud.achex.ca/hackingdemo');
 
   socket.addEventListener('open', function (event) {
@@ -22,3 +29,9 @@
       data[data.length] = json.msg;
     }
   })
+    </script>
+  </head>
+  <body>
+    <h1>GET</h1>
+  </body>
+</html>
