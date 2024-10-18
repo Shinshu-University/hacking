@@ -6,32 +6,42 @@
     <title>get</title>
     <script>
       let data = [];
-  const socket = new WebSocket('wss://cloud.achex.ca/hackingdemo');
-
-  socket.addEventListener('open', function (event) {
-    socket.send('{"auth":"admin", "password":"pass"}');
-  });
-
-  socket.addEventListener('message', function (event) {
-    const json = JSON.parse(event.data)
-    if (json.auth == 'OK') {
-      return
-    }
-    console.log(json.msg);
-    if (json.msg == 'finish') {
-      console.log(data.join(''));
-      const a = document.createElement('a');
-      a.href = data.join('');
-      a.download = 'image.png';
-      a.click();
-      data = [];
-    } else {
-      data[data.length] = json.msg;
-    }
-  })
+      const socket = new WebSocket('wss://cloud.achex.ca/hackingdemo');
+      socket.addEventListener('open', function (event) {
+        socket.send('{"auth":"admin", "password":"pass"}');
+      });
+      socket.addEventListener('message', function (event) {
+        const json = JSON.parse(event.data);
+        if (json.auth == 'OK') {
+          return;
+        }
+        console.log(json.msg);
+        if (json.msg == 'finish') {
+          const imageData = data.join('');
+          const imgElement = document.getElementById('image');
+          imgElement.src = imageData;
+          const dateElement = document.getElementById('received-date');
+          const now = new Date();
+          dateElement.textContent = `受信日時: ${now.toLocaleString()}`;
+          const downloadButton = document.getElementById('download-btn');
+          downloadButton.onclick = function() {
+            const a = document.createElement('a');
+            a.href = imageData;
+            a.download = 'image.png';
+            a.click();
+          };
+          data = [];
+        } else {
+          data[data.length] = json.msg;
+        }
+      });
     </script>
   </head>
   <body>
     <h1>GET</h1>
+    <img id="image" alt="画像がここに表示されます" style="max-width: 100%; height: auto;" />
+    <div id="received-date">受信日時: まだ受信されていません</div>
+    <button id="download-btn">画像をダウンロード</button>
+
   </body>
 </html>
