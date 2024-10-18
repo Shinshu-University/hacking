@@ -1,0 +1,81 @@
+* {
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+body {
+    background-color: #f8f9fa;
+    color: #343a40;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    color: #007bff;
+}
+.post-form {
+    margin-bottom: 20px;
+}
+.post-form input,
+.post-form textarea {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.post-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.refresh-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.post-form button:hover,
+.refresh-button:hover {
+    background-color: #0056b3;
+}
+.error-message {
+    color: red;
+}
+.admin-section {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    font-size: 0.8em;
+  text-align: center;
+}
+#delete-form {
+    display: none;
+    margin-top: 10px;
+}
+#delete-toggle {
+    cursor: pointer;
+    color: #2e2e2e;
+}
+#delete-post {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+#delete-post:hover {
+    background-color: #c82333;
+}
