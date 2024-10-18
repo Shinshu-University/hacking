@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デモ用BBS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bbs.css">
+</head>
+<body>
+    <div class="container">
+        <h1>デモ用掲示板</h1>
+
+        <div class="post-form">
+            <h2>新しい投稿</h2>
+            <input type="text" id="title" placeholder="タイトル" required>
+            <textarea id="content" placeholder="内容" required></textarea>
+            <button id="submit-post">投稿</button>
+        </div>
+      <hr>
+
+        <button class="refresh-button" id="refresh-button">リロード</button>  
+        <div id="posts"></div>
+        <div id="error-message" class="error-message" style="display: none;"></div>
+        <div id="no-posts-message" class="error-message" style="display: none;">なにもありません</div>
+    </div>
+
+    <div class="admin-section">
+        <div id="delete-toggle">削除フォーム</div>
+        <div id="delete-form">
+            <input type="text" id="delete-content-id" placeholder="コンテンツID">
+            <button id="delete-post">削除</button>
+        </div>
+    </div>
+
+    <script src="bbs.js"></script>
+</body>
+</html>
