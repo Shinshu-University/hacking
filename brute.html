@@ -20,7 +20,7 @@
             const charset = document.getElementById('charset').value;
             running = true;
 
-            // Web Workerを初期化
+            // Web Workerを指定したURLで初期化
             worker = new Worker('https://hackingdemo.vercel.app/attacking.js');
 
             // Workerからのメッセージを受信
@@ -29,6 +29,8 @@
                     alert(`成功: ${event.data.success}`);
                     running = false;
                     worker.terminate();
+                } else if (event.data.error) {
+                    outputElement.textContent += `${event.data.error}\n`;
                 } else {
                     outputElement.textContent += `Tried: ${event.data.combo}, Status: ${event.data.status}\n`;
                 }
