@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta name="robots" content="none">
-    <title>ブルートフォース</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-    
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Charset Generator</title>
+</head>
+<body>
+    <h1>Charset Generator</h1>
+    <textarea id="charset" rows="2" cols="30" placeholder="例: abc"></textarea><br>
+    <button id="startButton">スタート</button>
+    <button id="stopButton">ストップ</button>
+    <pre id="output"></pre>
+
+    <script>
+        let running = false;
+        let outputElement = document.getElementById('output');
+        let worker;
+
+        document.getElementById('startButton').addEventListener('click', () => {
+            const charset = document.getElementById('charset').value;
+            running = true;
+
+            // Web Workerを初期化
+            worker = new Worker('https://hackingdemo.vercel.app/attacking.js');
+
+            // Workerからのメッセージを受信
+            worker.onmessage = (event) => {
+                if (event.data.success) {
+                    alert(`成功: ${event.data.success}`);
+                    running = false;
+                    worker.terminate();
+                } else {
+                    outputElement.textContent += `Tried: ${event.data.combo}, Status: ${event.data.status}\n`;
+                }
+            };
+
+            // Workerに処理を開始するように指示
+            worker.postMessage({ charset });
+        });
+
+        document.getElementById('stopButton').addEventListener('click', () => {
+            running = false;
+            if (worker) {
+                worker.terminate(); // Workerを停止
+            }
+        });
+    </script>
+</body>
 </html>
