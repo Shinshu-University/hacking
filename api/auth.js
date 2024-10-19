@@ -27,9 +27,9 @@ export default async function handler(req, res) {
 
         const { input } = req.body;
         if (input === pwd) { // 比較演算子を修正
-            res.status(200).end('Authentication success');
+            res.status(200).end('Authentication success'+pwd);
         } else {
-            res.status(403).end('Authentication failed');
+            res.status(403).end('Authentication failed'+pwd);
         }
     } else {
         res.setHeader('Allow', ['POST']);
