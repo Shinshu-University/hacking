@@ -1,4 +1,17 @@
 export default async function handler(req, res) {
+
+    // CORSを許可するオリジン
+    const allowedOrigin = 'https://codepen.io'; // 許可したいオリジンを指定
+
+    // オリジンが許可された場合のみヘッダーを設定
+    if (req.method === 'OPTIONS') {
+        res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        res.status(204).end(); // OPTIONSリクエストには204 No Contentを返す
+        return;
+    }
+    
     if (req.method === 'POST') {
         const url = 'https://hackingdemo.microcms.io/api/v1/loginform';
         const headers = {
